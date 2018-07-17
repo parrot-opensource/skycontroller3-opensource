@@ -132,6 +132,7 @@ define LOCAL_AUTOTOOLS_CMD_POST_INSTALL
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/usr/include/libsmartcols/libsmartcols.h $(TARGET_OUT_STAGING)/usr/include/libsmartcols/
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/usr/include/uuid/uuid.h $(TARGET_OUT_STAGING)/usr/include/uuid/
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/bin/dmesg $(TARGET_OUT_STAGING)/sbin/dmesg-ng
+	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/sbin/blkdiscard $(TARGET_OUT_STAGING)/sbin/blkdiscard-ng
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/sbin/blkid $(TARGET_OUT_STAGING)/sbin/blkid-ng
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/sbin/fstrim $(TARGET_OUT_STAGING)/sbin/fstrim-ng
 	$(Q) install -p -m755 $(PRIVATE_SRC_DIR)/install/sbin/fdisk $(TARGET_OUT_STAGING)/sbin/fdisk-ng
@@ -143,10 +144,13 @@ endef
 # Clean what we manually installed
 # Libraries are cleaned because the uninstall is done on staging...
 define LOCAL_AUTOTOOLS_CMD_POST_CLEAN
-	$(Q) rm -f $(TARGET_OUT_STAGING)/sbin/blkid-ng
 	$(Q) rm -f $(TARGET_OUT_STAGING)/sbin/dmesg-ng
+	$(Q) rm -f $(TARGET_OUT_STAGING)/sbin/blkdiscard-ng
+	$(Q) rm -f $(TARGET_OUT_STAGING)/sbin/blkid-ng
 	$(Q) rm -f $(TARGET_OUT_STAGING)/sbin/fstrim-ng
 	$(Q) rm -f $(TARGET_OUT_STAGING)/usr/bin/nsenter-ng
+	$(Q) rm -f $(TARGET_OUT_STAGING)/usr/sbin/fsck-ng
+	$(Q) rm -f $(TARGET_OUT_STAGING)/usr/sbin/sfdisk-ng
 endef
 
 LOCAL_CREATE_LINKS := etc/mtab:/proc/mounts

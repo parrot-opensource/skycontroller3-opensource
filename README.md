@@ -1,5 +1,5 @@
 Open Source Software used in **Parrot SkyController3**.  
-Firmware version: **1.0.1**  
+Firmware version: **1.0.3**  
 Unless stated otherwise, later versions of the firmware
 use these same software modules.
 
