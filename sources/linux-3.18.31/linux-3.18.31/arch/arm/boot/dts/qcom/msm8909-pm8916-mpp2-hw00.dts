@@ -1,0 +1,225 @@
+/*
+ * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8909-pm8916-mpp2-common.dtsi"
+
+/ {
+	sdhc_2_vdd: regulator-sdhc2_vdd {
+		compatible = "regulator-fixed";
+		regulator-name = "SDHC2 VDD";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		status = "okay";
+	};
+
+	sdhc_2_vdd_io: regulator-sdhc2_vdd_io {
+		compatible = "regulator-fixed";
+		regulator-name = "SDHC2 VDD-IO";
+		regulator-min-microvolt = <2950000>;
+		regulator-max-microvolt = <2950000>;
+		status = "okay";
+	};
+};
+
+&soc {
+	pinctrl@1000000 {
+		sdc2_wlan_gpio {
+			qcom,pins = <&msm_gpio 53>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "wlan_en_gpio";
+			sdc2_wlan_gpio_active: sdc2_wlan_gpio_active {
+				output-high;
+				drive-strength = <8>;
+				bias-pull-up;
+			};
+		};
+	};
+
+	gpio_keys {
+		bp@1 {
+			label = "button_a";
+			gpios = <&msm_gpio 41 0x1>;
+			linux,input-type = <1>;
+			linux,code = <288>;
+			debounce-interval = <15>;
+		};
+		bp@2 {
+			label = "button_b";
+			gpios = <&msm_gpio 42 0x1>;
+			linux,input-type = <1>;
+			linux,code = <289>;
+			debounce-interval = <15>;
+		};
+		bp@3 {
+			label = "button_c";
+			gpios = <&msm_gpio 44 0x1>;
+			linux,input-type = <1>;
+			linux,code = <290>;
+			debounce-interval = <15>;
+		};
+		bp@4 {
+			label = "button_x";
+			gpios = <&msm_gpio 45 0x1>;
+			linux,input-type = <1>;
+			linux,code = <291>;
+			debounce-interval = <15>;
+		};
+		bp@5 {
+			label = "button_y";
+			gpios = <&msm_gpio 46 0x1>;
+			linux,input-type = <1>;
+			linux,code = <292>;
+			debounce-interval = <15>;
+		};
+		bp@6 {
+			label = "button_r1";
+			gpios = <&msm_gpio 48 0x1>;
+			linux,input-type = <1>;
+			linux,code = <293>;
+			debounce-interval = <15>;
+		};
+		bp@7 {
+			label = "button_l1";
+			gpios = <&msm_gpio 47 0x1>;
+			linux,input-type = <1>;
+			linux,code = <294>;
+			debounce-interval = <15>;
+		};
+	};
+};
+
+&gpio_key_active {
+	mux {
+		pins = "gpio41", "gpio42", "gpio43", "gpio44", "gpio45", "gpio46", "gpio47";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio41", "gpio42", "gpio43", "gpio44", "gpio45", "gpio46", "gpio47";
+		drive-strength = <2>;
+		bias-pull-up;
+	};
+};
+
+&gpio_key_suspend {
+	mux {
+		pins = "gpio41", "gpio42", "gpio43", "gpio44", "gpio45", "gpio46", "gpio47";
+		function = "gpio";
+	};
+
+	config {
+		pins = "gpio41", "gpio42", "gpio43", "gpio44", "gpio45", "gpio46", "gpio47";
+		drive-strength = <2>;
+		bias-pull-up;
+	};
+};
+
+/* PWM */
+&pwm0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pwm0_sleep>;
+};
+
+&pwm1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pwm1_sleep>;
+};
+
+&pwm2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pwm2_sleep>;
+};
+
+&pwm3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pwm3_sleep>;
+};
+
+/* SPI */
+/* Enable spi_3 on BLSP1 QUP 2 */
+&spi_3 {
+	num-cs = <2>;
+	/* enable mpp2_gamepad */
+	spi_mpp_gamepad@1 {
+		compatible = "parrot, mpp2_gamepad";
+		max-samples = <1>;
+		adc-channels =  <0>, <1>,	/* SW201 */
+				<2>, <3>,	/* SW202 */
+				<4>, <5>;	/* SW203 */
+		adc-channel-names = "joystick-left-x",
+				"joystick-left-y",
+				"joystick-right-x",
+				"joystick-right-y",
+				"rotary-left",
+				"rotary-right";
+
+		adc-chip = "adc088s022";
+
+		reg = <0>;
+		spi-max-frequency = <960000>;
+	};
+};
+
+/* SDHC */
+&sdhc_1 {
+	vdd-supply = <&pm8916_l8>;
+	qcom,vdd-voltage-level = <2900000 2900000>;
+	qcom,vdd-current-level = <200 400000>;
+
+	vdd-io-supply = <&pm8916_l5>;
+	qcom,vdd-io-always-on;
+	qcom,vdd-io-lpm-sup;
+	qcom,vdd-io-voltage-level = <1800000 1800000>;
+	qcom,vdd-io-current-level = <200 60000>;
+
+	pinctrl-names = "active", "sleep";
+	pinctrl-0 = <&sdc1_clk_on &sdc1_cmd_on &sdc1_data_on>;
+	pinctrl-1 = <&sdc1_clk_off &sdc1_cmd_off &sdc1_data_off>;
+
+	qcom,bus-speed-mode = "HS200_1p8v", "DDR_1p8v";
+	qcom,nonremovable;
+
+	status = "ok";
+};
+
+&sdhc_2 {
+	interrupt-parent = <&sdhc_2>;
+	interrupts = <0 1 2>;
+	#interrupt-cells = <1>;
+	interrupt-map-mask = <0xffffffff>;
+	interrupt-map = <0 &intc 0 125 0
+			1 &intc 0 221 0
+			2 &msm_gpio 38 0>;
+	interrupt-names = "hc_irq", "pwr_irq", "sdiowakeup_irq";
+
+	vdd-supply = <&sdhc_2_vdd>;
+	qcom,vdd-voltage-level = <1800000 1800000>;
+	qcom,vdd-io-voltage-level = <2950000 2950000>;
+
+	vdd-io-supply = <&sdhc_2_vdd_io>;
+	qcom,vdd-io-voltage-level = <1800000 2950000>;
+	qcom,vdd-io-current-level = <200 50000>;
+};
+
+&spmi_bus {
+	qcom,pm8916@0 {
+		pm8916_pon: qcom,power-on@800 {
+			qcom,pon_1 {
+			    qcom,s2-type = <4>;
+			};
+		};
+	};
+};

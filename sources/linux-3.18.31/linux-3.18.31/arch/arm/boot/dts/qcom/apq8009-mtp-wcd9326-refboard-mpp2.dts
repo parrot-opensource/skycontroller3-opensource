@@ -1,0 +1,161 @@
+/*
+ * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8909-mtp.dtsi"
+#include "msm8909-pm8916.dtsi"
+#include "msm8909-pm8916-mtp.dtsi"
+#include "apq8009-audio-external_codec.dtsi"
+#include "apq8009-memory.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. APQ8009 WCD9326 Reference Board";
+	compatible = "qcom,apq8009";
+	qcom,msm-id = <265 2>;
+	qcom,board-id= <8 0x8>;
+
+	qcom,dtsfilename = __FILE__;
+};
+
+&soc {
+	sound-9335 {
+		qcom,audio-routing =
+			"AIF4 VI", "MCLK",
+			"RX_BIAS", "MCLK",
+			"MADINPUT", "MCLK",
+			"AMIC2", "MIC BIAS2",
+			"MIC BIAS2", "Headset Mic",
+			"DMIC0", "MIC BIAS1",
+			"MIC BIAS1", "Digital Mic0",
+			"DMIC1", "MIC BIAS1",
+			"MIC BIAS1", "Digital Mic1",
+			"DMIC2", "MIC BIAS3",
+			"MIC BIAS3", "Digital Mic2",
+			"DMIC3", "MIC BIAS3",
+			"MIC BIAS3", "Digital Mic3",
+			"SpkrLeft IN", "SPK1 OUT",
+			"SpkrRight IN", "SPK2 OUT";
+	};
+
+	i2c@78b8000 {
+		wcd9xxx_codec@d {
+			qcom,cdc-reset-gpio = <&msm_gpio 27 0>;
+		};
+	};
+
+	/* Enable spi_2 on BLSP1 QUP 2 */
+	spi@78b6000 {
+		num-cs = <2>;
+
+		/* enable mpp2_gamepad */
+		spi_mpp_gamepad@1 {
+			compatible = "parrot, mpp2_gamepad";
+			max-samples = <1>;
+			adc-channels =  <1>, <2>,	/* SW201 */
+					<3>, <4>,	/* SW202 */
+					<5>, <6>;	/* SW203 */
+			adc-channel-names = "joystick-left-x",
+					"joystick-left-y",
+					"joystick-right-x",
+					"joystick-right-y",
+					"rotary-left",
+					"rotary-right";
+
+			adc-chip = "adc088s022";
+
+			reg = <2>;
+			spi-max-frequency = <960000>;
+			spi-cs-high;
+		};
+	};
+
+	pinctrl@1000000 {
+		sdc2_wlan_gpio {
+			qcom,pins = <&msm_gpio 43>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "wlan_en_gpio";
+			sdc2_wlan_gpio_active: sdc2_wlan_gpio_active {
+				output-high;
+				drive-strength = <8>;
+				bias-pull-up;
+			};
+		};
+	};
+
+	user-gpio {
+		compatible = "parrot,user-gpio";
+		ipod-rst {
+			output = <0>;
+			gpios = <&msm_gpio 98 0x40>;
+		};
+	};
+};
+
+/* To avoid conflict with spi_2 */
+&i2c_2 {
+	status = "disabled";
+};
+
+&i2c_4 {
+	smb1360_otg_supply: smb1360-chg-fg@14 {
+		compatible = "qcom,smb1360-chg-fg";
+		reg = <0x14>;
+		interrupt-parent = <&msm_gpio>;
+		interrupts = <58 8>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&smb_int_default>;
+		qcom,charging-disabled;
+		qcom,empty-soc-disabled;
+		qcom,chg-inhibit-disabled;
+		qcom,float-voltage-mv = <4200>;
+		qcom,iterm-ma = <200>;
+		qcom,recharge-thresh-mv = <100>;
+		qcom,thermal-mitigation = <1500 700 600 0>;
+		regulator-name = "smb1360_otg_vreg";
+	};
+};
+
+&usb_otg {
+	vbus_otg-supply = <&smb1360_otg_supply>;
+	qcom,hsusb-otg-mode = <3>; /* OTG */
+	qcom,hsusb-otg-otg-control = <3>; /* User sysfs */
+	qcom,hsusb-otg-default-mode = <2>; /* Default Host */
+};
+
+&pm8916_chg {
+	status = "ok";
+	qcom,use-external-charger;
+};
+
+&pm8916_bms {
+	status = "ok";
+	qcom,disable-bms;
+};
+
+&sdhc_2 {
+	/delete-property/ cd-gpios;
+
+	interrupt-names = "hc_irq", "pwr_irq", "sdiowakeup_irq";
+
+	qcom,vdd-voltage-level = <1800000 1800000>;
+
+	qcom,bus-bw-vectors-bps = <0 400000 20000000 25000000 50000000 100000000 >;
+	qcom,clk-rates = <400000 25000000 50000000 100000000 >;
+	qcom,bus-speed-mode = "SDR12", "SDR25", "SDR50", "DDR50","SDR104";
+
+	pinctrl-0 = <&sdc2_clk_on &sdc2_cmd_on &sdc2_data_on &sdc2_wlan_gpio_active>;
+	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off>;
+};
+

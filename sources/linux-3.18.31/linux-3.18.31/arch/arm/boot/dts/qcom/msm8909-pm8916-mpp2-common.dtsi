@@ -1,0 +1,264 @@
+/*
+ * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "msm8909.dtsi"
+#include "msm8909-pinctrl.dtsi"
+#include "msm8909-pm8916.dtsi"
+
+/ {
+	model = "mpp2";
+	compatible = "qcom,msm8909";
+	qcom,board-id= <8 0x2>;
+
+	qcom,dtsfilename = __FILE__;
+
+	vbus_otg: fixedregulator@0 {
+		compatible = "regulator-fixed";
+		regulator-name = "vbus_otg";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		regulator-boot-on;
+	};
+};
+
+/*
+ * free some unused memory
+ */
+/delete-node/ &modem_heap;
+/delete-node/ &modem_adsp_mem;
+/delete-node/ &cont_splash_mem;
+
+&mdss_fb0 {
+    qcom,cont-splash-memory {
+	/delete-property/ linux,contiguous-region;
+	};
+};
+
+&soc {
+    /delete-node/ qcom,mss@4080000; /* this is the modem code loading device */
+};
+
+/*
+ * reserved 1M for ramoops/pstore
+ * this is now at the end of the original modem_adsp_region
+ * the region needs to match the command line set from LK
+ */
+
+/ {
+    reserved-memory {
+        ramoops: ramoops@0 {
+			reg = <0x0 0x8d400000 0x0 0x00100000>;
+			compatible = "removed-dma-pool";
+			no-map;
+		};
+    };
+};
+
+
+/* USB */
+&usb_otg {
+	vbus_otg-supply = <&vbus_otg>;
+	qcom,hsusb-otg-vbus-gpio = <&msm_gpio 27 0>;
+	qcom,hsusb-otg-mode = <3>; /* OTG */
+	qcom,hsusb-otg-otg-control = <3>; /* User sysfs */
+	qcom,hsusb-otg-default-mode = <2>; /* Default Host */
+};
+
+
+&soc {
+	sound-9335 {
+		status = "disabled";
+	};
+
+	i2c@78b8000 {
+		wcd9xxx_codec@d {
+			/* disable external codec */
+			status = "disabled";
+		};
+	};
+	user-gpio {
+		compatible = "parrot,user-gpio";
+		ipod-rst {
+			output = <0>;
+			gpios = <&msm_gpio 26 0x0>;
+		};
+	};
+
+	/* disable pil_ */
+	qcom,mss@4080000 {
+		status = "disabled";
+	};
+
+	/* disable user space shared memory */
+	qcom,rmtfs_sharedmem@87c00000 {
+		status = "disabled";
+	};
+
+	qcom,dsp_sharedmem@87ce0000 {
+		status = "disabled";
+	};
+
+	qcom,mdm_sharedmem@87cf0000 {
+		status = "disabled";
+	};
+
+	/* disable mdss clock */
+	qcom,gcc-mdss@1ac8300 {
+		status = "disabled";
+	};
+};
+
+/* UART */
+&blsp1_uart1 {
+	status = "ok";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_console_sleep>;
+};
+
+/* SDHC */
+&sdhc_2 {
+	qcom,bus-bw-vectors-bps = <0 400000 20000000 25000000 50000000 100000000 >;
+	qcom,clk-rates = <400000 25000000 50000000 100000000 >;
+	qcom,bus-speed-mode = "SDR12", "SDR25", "SDR50", "DDR50","SDR104";
+
+	pinctrl-names = "active", "sleep";
+	pinctrl-0 = <&sdc2_clk_on &sdc2_cmd_on &sdc2_data_on &sdc2_wlan_gpio_active>;
+	pinctrl-1 = <&sdc2_clk_off &sdc2_cmd_off &sdc2_data_off>;
+
+	status = "ok";
+};
+
+&qcom_rng {
+       status = "okay";
+};
+
+&qcom_crypto {
+       status = "okay";
+};
+
+&qcom_cedev {
+       status = "okay";
+};
+
+&qcom_seecom {
+       status = "okay";
+};
+
+&qcom_tzlog {
+       status = "okay";
+};
+
+/* CoreSight */
+&tpiu {
+	pinctrl-names = "sdcard", "trace", "swduart",
+			"swdtrc", "jtag", "spmi";
+	/* NIDnT */
+	pinctrl-0 = <&qdsd_clk_sdcard &qdsd_cmd_sdcard
+		     &qdsd_data0_sdcard &qdsd_data1_sdcard
+		     &qdsd_data2_sdcard &qdsd_data3_sdcard>;
+	pinctrl-1 = <&qdsd_clk_trace &qdsd_cmd_trace
+		     &qdsd_data0_trace &qdsd_data1_trace
+		     &qdsd_data2_trace &qdsd_data3_trace>;
+	pinctrl-2 = <&qdsd_cmd_swduart &qdsd_data0_swduart
+		     &qdsd_data1_swduart &qdsd_data2_swduart
+		     &qdsd_data3_swduart>;
+	pinctrl-3 = <&qdsd_clk_swdtrc &qdsd_cmd_swdtrc
+		     &qdsd_data0_swdtrc &qdsd_data1_swdtrc
+		     &qdsd_data2_swdtrc &qdsd_data3_swdtrc>;
+	pinctrl-4 = <&qdsd_cmd_jtag &qdsd_data0_jtag
+		     &qdsd_data1_jtag &qdsd_data2_jtag
+		     &qdsd_data3_jtag>;
+	pinctrl-5 = <&qdsd_clk_spmi &qdsd_cmd_spmi
+		     &qdsd_data0_spmi &qdsd_data3_spmi>;
+};
+
+/* I2C */
+/* To avoid conflict with spi_3 */
+&i2c_3 {
+	status = "disabled";
+};
+
+/* PMIC */
+&pm8916_chg {
+	status = "disabled";
+};
+
+&pm8916_bms {
+	status = "disabled";
+};
+
+&spmi_bus {
+	qcom,pm8916@0 {
+		qcom,leds@a300 {
+			status = "disabled";
+		};
+	};
+
+	qcom,pm8916@1 {
+		qcom,vibrator@c000 {
+			status = "disabled";
+		};
+	};
+};
+
+&pm8916_mpps {
+	mpp@a000 { /* MPP 1 */
+		/* VDD_PX */
+		status = "disabled";
+	};
+
+	mpp@a100 { /* MPP 2 */
+		/* HR LED */
+		status = "disabled";
+	};
+
+	mpp@a200 { /* MPP 3 */
+		/* VREF DAC */
+		status = "disabled";
+	};
+
+	mpp@a300 { /* MPP 4 */
+		/* Backlight PWM */
+		qcom,mode = <1>;		/* Digital output */
+		qcom,invert = <0>;		/* Disable invert */
+		qcom,src-sel = <4>;		/* DTEST1 */
+		qcom,vin-sel = <0>;		/* VPH_PWR */
+		qcom,master-en = <1>;		/* Enable MPP */
+	};
+};
+
+&pm8916_gpios {
+	gpio@c000 { /* GPIO 1 */
+		/* Battery UICC Alarm */
+		status = "disabled";
+	};
+
+	gpio@c100 { /* GPIO 2 */
+		/* NFC_CLK_REQ */
+		qcom,mode = <0>; /* QPNP_PIN_MODE_DIG_IN */
+		qcom,pull = <5>; /* QPNP_PIN_PULL_NO */
+		qcom,vin-sel = <2>; /* QPNP_PIN_VIN2 */
+		qcom,src-sel = <2>; /* QPNP_PIN_SEL_FUNC_1 */
+		qcom,master-en = <1>;
+	};
+
+	gpio@c200 { /* GPIO 3 */
+		/* External regulator control for WTR */
+		status = "disabled";
+	};
+
+	gpio@c300 { /* GPIO 4 */
+		/* External regulator control for APC */
+		status = "disabled";
+	};
+};

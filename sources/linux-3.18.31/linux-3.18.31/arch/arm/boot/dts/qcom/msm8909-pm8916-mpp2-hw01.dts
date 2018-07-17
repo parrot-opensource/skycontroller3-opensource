@@ -1,0 +1,161 @@
+/*
+ * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "msm8909-pm8916-mpp2-common.dtsi"
+
+/ {
+	qcom,board-id= <0x02010008 0x0>;
+};
+
+&soc {
+
+	cpubw: qcom,cpubw {
+		qcom,bw-tbl =
+			<  762 /* 100 MHz */>,
+			< 1525 /* 200 MHz */>,
+			< 3051 /* 400 MHz */>;
+	};
+
+	pinctrl@1000000 {
+		uart_tiny_sleep: uart_tiny_sleep {
+			mux {
+				pins = "gpio20", "gpio21";
+				function = "blsp_uart2";
+			};
+			config {
+				pins = "gpio20", "gpio21";
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+	};
+
+	user-gpio {
+		reset-tiny {
+			output = <0>;
+			gpios = <&msm_gpio 66 0x0>;
+		};
+
+		wifi_nrst {
+			output = <0>;
+			gpios = <&msm_gpio 43 0x0>;
+		};
+
+		mpp3_nmpp2 {
+			gpios = <&msm_gpio 73 0x0>;
+		};
+	};
+};
+
+/* USB */
+&usb_otg {
+	/* to speed up host <-> device switch */
+	qcom,hsusb-otg-disable-reset;
+	qcom,hsusb-otg-quick-host-device-switch;
+};
+
+/* i2c_1 : sensors */
+/* i2c_4 : charger */
+/* i2c_5 : chip ipod */
+
+&i2c_1 {
+	lsm303agr-accel@19 {
+		compatible = "st,lsm303agr-accel";
+		reg = <0x19>;
+		st,drdy-int-pin = <1>;
+		interrupt-parent = <&msm_gpio>;
+		interrupts = <64 0x20001>;
+	};
+	lsm303agr-magn@1e {
+		compatible = "st,lsm303agr-magn";
+		reg = <0x1e>;
+		st,drdy-int-pin = <1>;
+		interrupt-parent = <&msm_gpio>;
+		interrupts = <65 0x20001>;
+	};
+};
+
+/* Unused i2c */
+&i2c_2 {
+	status = "disabled";
+};
+
+&qnand_1 {
+	status = "okay";
+};
+
+/* UART tiny */
+&blsp1_uart2 {
+	qcom,use-pm;
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_tiny_sleep>;
+	status = "okay";
+};
+
+/* SDHC */
+&sdhc_2 {
+	/delete-property/ cd-gpios;
+
+	interrupt-names = "hc_irq", "pwr_irq";
+
+	vdd-supply = <&pm8916_l5>;
+	qcom,vdd-voltage-level = <1800000 1800000>;
+	qcom,vdd-current-level = <200 200>;
+
+	vdd-io-supply = <&pm8916_l5>;
+	qcom,vdd-io-voltage-level = <1800000 1800000>;
+	qcom,vdd-io-current-level = <200 200>;
+
+	qcom,core_3_0v_support;
+
+	pinctrl-0 = <&sdc2_clk_on &sdc2_cmd_on &sdc2_data_on>;
+};
+
+/* VREG_BOOST : VBUS */
+&spmi_bus {
+	qcom,pm8916@0 {
+		pm8916_pon: qcom,power-on@800 {
+			/* warm reset is not working, so we force hard reset */
+			qcom,warm-reset-poweroff-type = <7>;
+			qcom,pon_1 {
+			    qcom,s2-type = <4>;
+			};
+		};
+	};
+
+	qcom,pm8916@1 {
+		/* disable internal audio codec */
+		msm8x16_wcd_codec@f100{
+			status = "disabled";
+		};
+
+		/* enable vbus vreg boost driver */
+		/* does not work well, do not enable yet */
+		pm8916_vbus_vreg_boost: vbus_vreg_boost@f100{
+			compatible = "parrot,pm8916_vreg_boost";
+			reg = <0xf000 0x220>;
+
+			vreg-boost-enable;
+			/* voltage in mV */
+			vreg-boost-voltage = <5200>;
+
+			/* voltage in mA */
+			vreg-boost-current = <2000>;
+			vreg-boost-allow-update;
+
+			status = "ok";
+		};
+	};
+};

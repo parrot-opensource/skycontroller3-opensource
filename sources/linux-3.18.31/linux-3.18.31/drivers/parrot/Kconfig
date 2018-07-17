@@ -1,0 +1,9 @@
+menuconfig PARROT
+	bool "Parrot drivers"
+	default n
+
+if PARROT
+
+source "drivers/parrot/gpio/Kconfig"
+
+endif #PARROT
