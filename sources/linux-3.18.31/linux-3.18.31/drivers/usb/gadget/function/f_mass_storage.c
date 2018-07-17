@@ -261,6 +261,10 @@ static int msc_vfs_timer_period_ms = MSC_VFS_TIMER_PERIOD_MS;
 module_param(msc_vfs_timer_period_ms, int, S_IRUGO | S_IWUSR);
 MODULE_PARM_DESC(msc_vfs_timer_period_ms, "Set period for MSC VFS timer");
 
+static int max_luns = FSG_MAX_LUNS;
+module_param(max_luns, int, S_IRUGO | S_IWUSR);
+MODULE_PARM_DESC(max_luns, "maximum number of luns");
+
 static int write_error_after_csw_sent;
 static int must_report_residue;
 static int csw_sent;
@@ -3810,7 +3814,7 @@ static struct usb_function_instance *fsg_alloc_inst(void)
 		rc = PTR_ERR(opts->common);
 		goto release_opts;
 	}
-	rc = fsg_common_set_nluns(opts->common, FSG_MAX_LUNS);
+	rc = fsg_common_set_nluns(opts->common, max_luns);
 	if (rc)
 		goto release_opts;
 

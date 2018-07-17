@@ -9,6 +9,11 @@ LOCAL_CATEGORY_PATH := libs
 
 LOCAL_EXPORT_LDLIBS := -lusb
 
+# Only if gcc >= 7.0.0
+ifneq ("$(call check-version,$(TARGET_CC_VERSION),7)","")
+  LOCAL_CFLAGS := -Wno-error=format-truncation
+endif
+
 LOCAL_AUTOTOOLS_VERSION := 0.1.12
 LOCAL_AUTOTOOLS_ARCHIVE := $(LOCAL_MODULE)-$(LOCAL_AUTOTOOLS_VERSION).tar.gz
 LOCAL_AUTOTOOLS_SUBDIR := $(LOCAL_MODULE)-$(LOCAL_AUTOTOOLS_VERSION)
