@@ -66,6 +66,11 @@
 		mpp3_nmpp2 {
 			gpios = <&msm_gpio 73 0x0>;
 		};
+
+		usba_vbus {
+			output = <0>;
+			gpios = <&msm_gpio 27 0x0>;
+		};
 	};
 
 	gpio_keys {
@@ -83,6 +88,8 @@
 
 /* USB */
 &usb_otg {
+	/* user space will enable/disable USB A vbus */
+	/delete-property/ qcom,hsusb-otg-vbus-gpio;
 	/* to speed up host <-> device switch */
 	qcom,hsusb-otg-disable-reset;
 	qcom,hsusb-otg-quick-host-device-switch;
@@ -200,7 +207,7 @@
 			vreg-boost-voltage = <5200>;
 
 			/* voltage in mA */
-			vreg-boost-current = <3000>;
+			vreg-boost-current = <1000>;
 			vreg-boost-allow-update;
 
 			status = "ok";
