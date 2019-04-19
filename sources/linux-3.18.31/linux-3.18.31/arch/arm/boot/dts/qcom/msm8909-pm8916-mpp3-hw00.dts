@@ -18,6 +18,20 @@
 / {
 	model = "mpp3";
 	qcom,board-id= <0x02010008 0x0>;
+	cpus {
+		cpu@0 {
+			clock-frequency = <200000>;
+		};
+		cpu@1 {
+			clock-frequency = <200000>;
+		};
+		cpu@2 {
+			clock-frequency = <200000>;
+		};
+		cpu@3 {
+			clock-frequency = <200000>;
+		};
+	};
 };
 
 &soc {
