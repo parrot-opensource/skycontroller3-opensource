@@ -2291,6 +2291,19 @@ static int qpnp_pon_probe(struct spmi_device *spmi)
 					"qcom,store-hard-reset-reason");
 
 	qpnp_pon_debugfs_init(spmi);
+
+	rc = qpnp_pon_input_dispatch(pon, PON_KPDPWR);
+	if (rc)
+		dev_err(&pon->spmi->dev, "Unable to send input event\n");
+
+	rc = qpnp_pon_input_dispatch(pon, PON_RESIN);
+	if (rc)
+		dev_err(&pon->spmi->dev, "Unable to send input event\n");
+
+	rc = qpnp_pon_input_dispatch(pon, PON_CBLPWR);
+	if (rc)
+		dev_err(&pon->spmi->dev, "Unable to send input event\n");
+
 	return 0;
 }
 

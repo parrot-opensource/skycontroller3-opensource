@@ -3736,6 +3736,10 @@ static irqreturn_t udc_irq(void)
 		if (USBi_PCI & intr) {
 			isr_statistics.pci++;
 			isr_resume_handler(udc);
+			if (udc->configured)
+				usb_gadget_set_state(&udc->gadget, USB_STATE_CONFIGURED);
+			else
+				usb_gadget_set_state(&udc->gadget, udc->suspend_state);
 		}
 		if (USBi_UEI & intr)
 			isr_statistics.uei++;
@@ -3746,6 +3750,7 @@ static irqreturn_t udc_irq(void)
 		}
 		if (USBi_SLI & intr) {
 			isr_suspend_handler(udc);
+			udc->suspend_state = udc->gadget.state;
 			usb_gadget_set_state(&udc->gadget, USB_STATE_SUSPENDED);
 			isr_statistics.sli++;
 		}

@@ -173,6 +173,11 @@
 	/* power on test for MPP3 */
 	qcom,pm8916@0 {
 		pm8916_pon: qcom,power-on@800 {
+			interrupts = <0x0 0x8 0x0>,
+				     <0x0 0x8 0x1>,
+				     <0x0 0x8 0x2>;
+			interrupt-names = "kpdpwr", "resin", "cblpwr";
+
 			qcom,pon_1 {
 				qcom,support-reset = <0>;
 				/delete-property/ qcom,s1-timer;
@@ -185,6 +190,13 @@
 				qcom,s1-timer = <2048>;
 				qcom,s2-timer = <2000>;
 				qcom,s2-type = <4>;
+			};
+
+			qcom,pon_3 {
+				qcom,pon-type = <2>;
+				qcom,support-reset = <0>;
+				linux,code = <143>; // KEY_WAKEUP
+				qcom,pull-up = <1>;
 			};
 		};
 	};
