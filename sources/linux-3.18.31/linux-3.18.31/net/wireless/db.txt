@@ -72,6 +72,8 @@ country AT: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -126,6 +128,8 @@ country BE: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -150,6 +154,8 @@ country BG: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -302,6 +308,8 @@ country CY: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -323,6 +331,8 @@ country CZ: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -353,6 +363,8 @@ country DE: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
         # 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -370,6 +382,8 @@ country DK: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -412,6 +426,8 @@ country EE: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -434,6 +450,8 @@ country ES: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -457,6 +475,8 @@ country FI: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -481,6 +501,8 @@ country FR: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -498,6 +520,8 @@ country GB: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -554,6 +578,8 @@ country GR: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -602,6 +628,8 @@ country HR: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -626,6 +654,8 @@ country HU: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
         # 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -648,6 +678,8 @@ country IE: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 60 gHz band channels 1-4, ref: Etsi En 302 567
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
@@ -698,6 +730,8 @@ country IT: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -827,6 +861,8 @@ country LT: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -844,6 +880,8 @@ country LU: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -861,6 +899,8 @@ country LV: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -955,6 +995,8 @@ country MT: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1017,6 +1059,8 @@ country NL: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1107,6 +1151,8 @@ country PL: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1144,6 +1190,8 @@ country PT: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1185,6 +1233,8 @@ country RO: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1232,6 +1282,8 @@ country SE: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1256,6 +1308,8 @@ country SI: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
@@ -1273,6 +1327,8 @@ country SK: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	# Short range devices (SRDs)
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
