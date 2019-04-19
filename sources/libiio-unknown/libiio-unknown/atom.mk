@@ -215,3 +215,16 @@ LOCAL_REQUIRED_MODULES := \
 	libiio_test_plugin
 
 include $(BUILD_EXECUTABLE)
+
+
+###############################################################################
+# copy of python wrapper
+###############################################################################
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libiio-python-wrapper
+LOCAL_DESCRIPTION := just copy python wrapper
+LOCAL_CATEGORY_PATH := libs/libiio
+$(foreach __f,$(call all-files-under,bindings/python,.py), \
+	$(eval LOCAL_COPY_FILES += $(__f):usr/lib/python/iio/))
+include $(BUILD_CUSTOM)

@@ -6,7 +6,7 @@ TRIGGER_DIR=/dev/cfg/iio/triggers/hrtimer/${TRIGGER_NAME}
 function setup_channel () {
 	local sensor=$1
 	local channel=$2
-	local meta_file=${sensor}.ini
+	local meta_file=$(echo -n "${sensor}" | sed 's/[<>:"\\|?*]/_/g').ini
 	local sysfs_path=/sys/bus/iio/devices/$sensor
 
 	echo "Setup channel $channel"
@@ -30,7 +30,7 @@ function setup_channel () {
 function process_sensor () {
 	local sensor=$1
 	local sysfs_path=/sys/bus/iio/devices/$sensor
-	local meta_file=${sensor}.ini
+	local meta_file=$(echo -n "${sensor}" | sed 's/[<>:"\\|?*]/_/g').ini
 	local channels
 	echo "Processing sensor ${sensor#iio:device}: ${sensor}"
 	# Disable buffer to allow enabling scan elements
@@ -112,7 +112,7 @@ done
 running=
 for sensor in $sensors; do
 	process_sensor $sensor
-	cat /dev/${sensor} > ${sensor}.dat &
+	cat /dev/${sensor} > $(echo -n "${sensor}" | sed 's/[<>:"\\|?*]/_/g').dat &
 	running=${running}${running:+" "}$!
 done
 trap 'handle_sigint' SIGINT
