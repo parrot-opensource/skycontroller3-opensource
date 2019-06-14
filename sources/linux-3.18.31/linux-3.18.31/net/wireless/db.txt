@@ -1078,6 +1078,7 @@ country NO: DFS-ETSI
 	(5170 - 5250 @ 80), (20), AUTO-BW, NO-OUTDOOR
 	(5250 - 5330 @ 80), (20), DFS, AUTO-BW
 	(5490 - 5710 @ 160), (27), DFS
+	(5735 - 5835 @ 80), (14)
 	# 5.9ghz band
 	# reference: http://www.etsi.org/deliver/etsi_en/302500_302599/302571/01.02.00_20/en_302571v010200a.pdf
 	(5850 - 5870 @ 10), (30)
